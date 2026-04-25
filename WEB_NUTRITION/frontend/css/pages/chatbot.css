@@ -1,0 +1,504 @@
+/* Chatbot page */
+
+.chatbot-profile-badge {
+  background: var(--color-forest);
+  border-radius: var(--radius-md);
+  padding: 10px var(--space-md);
+  font: 400 13px var(--font-mono);
+  color: var(--color-mint);
+  letter-spacing: 0.5px;
+}
+
+/* ── Chat window ── */
+.chatbot-window {
+  background: var(--color-linen);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Messages ── */
+.chatbot-messages {
+  flex: 1;
+  min-height: 380px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  scroll-behavior: smooth;
+}
+
+.chatbot-messages::-webkit-scrollbar {
+  width: 4px;
+}
+.chatbot-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chatbot-messages::-webkit-scrollbar-thumb {
+  background: var(--color-sand);
+  border-radius: var(--radius-pill);
+}
+
+/* ── Bubbles ── */
+.chat-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 78%;
+  gap: 4px;
+}
+
+.chat-msg--user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.chat-msg--ai {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.chat-msg__bubble {
+  padding: 10px var(--space-sm);
+  border-radius: var(--radius-md);
+  font: 400 15px var(--font-body);
+  line-height: 1.65;
+  word-break: break-word;
+}
+
+.chat-msg--user .chat-msg__bubble {
+  background: var(--color-forest);
+  color: var(--color-cream);
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.chat-msg--ai .chat-msg__bubble {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  border: 1px solid var(--color-sand);
+  border-bottom-left-radius: var(--radius-sm);
+}
+
+.chat-msg--welcome .chat-msg__bubble {
+  background: var(--color-linen);
+  border: 1px solid var(--color-mint);
+  color: var(--color-forest);
+  font-style: italic;
+}
+
+.chat-msg--error .chat-msg__bubble {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #dc2626;
+}
+
+.chat-msg__time {
+  font: 400 11px var(--font-mono);
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+/* ── Typing indicator ── */
+.chatbot-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--space-xs) var(--space-md);
+  border-top: 1px solid var(--color-sand);
+  background: var(--color-linen);
+}
+
+.chatbot-typing__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-sage);
+  animation: chatbot-bounce 1.2s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.chatbot-typing__dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.chatbot-typing__dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes chatbot-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-typing__dot {
+    animation: none;
+    opacity: 0.8;
+  }
+}
+
+/* ── Input area ── */
+.chatbot-input-area {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  padding: var(--space-sm);
+  border-top: 1px solid var(--color-sand);
+  background: var(--color-cream);
+}
+
+.chatbot-textarea {
+  flex: 1;
+  background: var(--color-linen);
+  border: 1.5px solid var(--color-sand);
+  border-radius: var(--radius-md);
+  padding: 10px var(--space-sm);
+  font: 400 15px var(--font-body);
+  color: var(--color-ink);
+  resize: none;
+  overflow-y: hidden;
+  max-height: 140px;
+  line-height: 1.5;
+  transition: border-color var(--duration-fast) ease;
+}
+
+.chatbot-textarea:focus {
+  outline: none;
+  border-color: var(--color-sage);
+}
+
+.chatbot-textarea::placeholder {
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+.chatbot-send-btn {
+  background: var(--color-forest);
+  color: var(--color-cream);
+  border: none;
+  border-radius: var(--radius-md);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background var(--duration-fast) ease,
+    transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.chatbot-send-btn:hover:not(:disabled) {
+  background: var(--color-sage);
+  transform: translateY(-2px);
+}
+
+.chatbot-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Footer row ── */
+.chatbot-footer-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.chatbot-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.chatbot-suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.chatbot-chip {
+  background: var(--color-linen);
+  border: 1.5px solid var(--color-sand);
+  border-radius: var(--radius-pill);
+  padding: 7px 14px;
+  font: 400 13px var(--font-body);
+  color: var(--color-forest);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
+  white-space: nowrap;
+}
+
+.chatbot-chip:hover {
+  background: var(--color-forest);
+  color: var(--color-cream);
+  border-color: var(--color-forest);
+  transform: translateY(-1px);
+}
+
+.chatbot-clear-btn {
+  background: none;
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-pill);
+  padding: 7px 16px;
+  font: 400 13px var(--font-body);
+  color: var(--color-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  align-self: flex-end;
+  transition:
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+}
+
+.chatbot-clear-btn:hover {
+  border-color: var(--color-citrus);
+  color: var(--color-citrus);
+}
+
+/* ── Meal Review Toggle ── */
+.meal-review-toggle-row {
+  display: flex;
+}
+
+.meal-review-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--color-linen);
+  border: 1.5px solid var(--color-sand);
+  border-radius: var(--radius-pill);
+  padding: 9px 18px;
+  font: 500 13px var(--font-body);
+  color: var(--color-forest);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
+}
+
+.meal-review-toggle:hover,
+.meal-review-toggle--active {
+  background: var(--color-forest);
+  color: var(--color-cream);
+  border-color: var(--color-forest);
+  transform: translateY(-1px);
+}
+
+/* ── Meal Review Panel ── */
+.meal-review-panel {
+  background: var(--color-linen);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.meal-review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-sand);
+  background: var(--color-cream);
+}
+
+.meal-review-header__title {
+  font: 500 14px var(--font-mono);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-forest);
+}
+
+.meal-review-header__hint {
+  font: 400 12px var(--font-body);
+  color: var(--color-muted);
+  margin-top: 4px;
+}
+
+.meal-review-header__hint em {
+  font-style: normal;
+  color: var(--color-sage);
+  font-family: var(--font-mono);
+}
+
+.meal-review-header__close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--duration-fast) ease,
+    background var(--duration-fast) ease;
+}
+
+.meal-review-header__close:hover {
+  color: var(--color-forest);
+  background: var(--color-sand);
+}
+
+.meal-review-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+.meal-review-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.meal-review-section__label {
+  font: 500 13px var(--font-body);
+  color: var(--color-forest);
+  margin-bottom: 2px;
+}
+
+.meal-review-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meal-review-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.meal-review-input {
+  background: var(--color-cream);
+  border: 1.5px solid var(--color-sand);
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  font: 400 13px var(--font-body);
+  color: var(--color-ink);
+  transition: border-color var(--duration-fast) ease;
+}
+
+.meal-review-input:focus {
+  outline: none;
+  border-color: var(--color-sage);
+}
+
+.meal-review-input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+.meal-review-input--name {
+  flex: 2;
+  min-width: 0;
+}
+
+.meal-review-input--qty {
+  flex: 1;
+  min-width: 0;
+}
+
+.meal-review-row__delete {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  transition: color var(--duration-fast) ease;
+}
+
+.meal-review-row__delete:hover {
+  color: var(--color-citrus);
+}
+
+.meal-review-add {
+  background: none;
+  border: 1px dashed var(--color-sand);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  font: 400 12px var(--font-body);
+  color: var(--color-muted);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+}
+
+.meal-review-add:hover {
+  border-color: var(--color-sage);
+  color: var(--color-sage);
+}
+
+.meal-review-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-sm) var(--space-md);
+  border-top: 1px solid var(--color-sand);
+  background: var(--color-cream);
+}
+
+.meal-review-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--color-forest);
+  color: var(--color-cream);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 10px 22px;
+  font: 500 14px var(--font-body);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) ease,
+    transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.meal-review-submit:hover {
+  background: var(--color-sage);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .chatbot-messages {
+    max-height: 380px;
+  }
+  .chat-msg {
+    max-width: 92%;
+  }
+  .chatbot-footer-row {
+    flex-direction: column;
+  }
+  .chatbot-clear-btn {
+    align-self: flex-start;
+  }
+  .meal-review-body {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,120 @@
+.features {
+  padding: var(--space-2xl) 0;
+  background: var(--color-cream);
+}
+
+.features-header {
+  margin-bottom: var(--space-xl);
+}
+
+.features-header .section-label {
+  margin-bottom: var(--space-sm);
+}
+
+.features-header h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  color: var(--color-forest);
+  line-height: 1.1;
+  max-width: 14ch;
+  letter-spacing: -1px;
+}
+
+.features-header h2 em {
+  font-style: italic;
+  color: var(--color-sage);
+}
+
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--color-sand);
+}
+
+.feature-row:last-child {
+  border-bottom: 1px solid var(--color-sand);
+}
+
+.feature-row.reverse {
+  direction: rtl;
+}
+.feature-row.reverse > * {
+  direction: ltr;
+}
+
+.feature-text {
+  max-width: 480px;
+}
+
+.feature-number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--color-muted);
+  margin-bottom: var(--space-sm);
+  display: block;
+}
+
+.feature-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--color-forest);
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.5px;
+}
+
+.feature-title em {
+  font-style: italic;
+  color: var(--color-sage);
+}
+
+.feature-desc {
+  font-size: 16px;
+  color: var(--color-muted);
+  line-height: 1.75;
+  margin-bottom: var(--space-md);
+  max-width: 52ch;
+}
+
+.feature-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--space-md);
+}
+
+.feature-visual {
+  background: var(--color-linen);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-sand);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-visual svg {
+  width: 80%;
+  height: 80%;
+}
+
+@media (max-width: 900px) {
+  .feature-row,
+  .feature-row.reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: var(--space-md);
+  }
+  .feature-visual {
+    aspect-ratio: 16 / 9;
+  }
+  .feature-text {
+    max-width: 100%;
+  }
+}

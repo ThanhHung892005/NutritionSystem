@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ sơ sức khỏe — NutritionSystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/pages/dashboard.css" />
+    <link rel="stylesheet" href="css/pages/profile.css" />
+  </head>
+  <body>
+    <header class="dash-nav">
+      <a href="index.html" class="dash-nav__logo">NUTRITION·AI</a>
+      <nav class="dash-nav__links">
+        <a href="dashboard.html" class="dash-nav__link">Tổng quan</a>
+        <a href="profile.html" class="dash-nav__link is-active">Hồ sơ</a>
+        <a href="tracker.html" class="dash-nav__link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-nav__link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-nav__link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-nav__link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-nav__link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-nav__user">
+        <span id="navUserName">—</span>
+        <button class="btn-logout" id="logoutBtn" aria-label="Đăng xuất">
+          Đăng xuất
+        </button>
+      </div>
+      <button
+        class="dash-hamburger"
+        id="dashHamburger"
+        aria-label="Mở menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="dash-mobile-drawer" id="dashMobileDrawer" aria-hidden="true">
+      <nav class="dash-mobile-nav">
+        <a href="dashboard.html" class="dash-mobile-link">Tổng quan</a>
+        <a href="profile.html" class="dash-mobile-link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-mobile-link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-mobile-link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-mobile-link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-mobile-link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-mobile-link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-mobile-user">
+        <span id="mobileNavUserName">—</span>
+        <button class="btn-logout" id="mobileLogoutBtn">Đăng xuất</button>
+      </div>
+    </div>
+
+    <main class="dash-main">
+      <section class="dash-greeting">
+        <p class="section-label">. 01 .</p>
+        <h1 class="dash-greeting__title">Hồ sơ <em>sức khỏe</em></h1>
+        <p class="dash-greeting__sub">
+          AI sử dụng thông tin này để cá nhân hóa thực đơn và gợi ý dinh dưỡng.
+        </p>
+      </section>
+
+      <div class="profile-layout">
+        <!-- Form -->
+        <div class="profile-form-wrap">
+          <div class="auth-error" id="profileError" role="alert" hidden>
+            <span id="profileErrorMsg"></span>
+          </div>
+
+          <form class="profile-form" id="profileForm" novalidate>
+            <fieldset class="form-section">
+              <legend class="form-section__title">Thông tin cơ bản</legend>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="age">Tuổi</label>
+                  <input
+                    class="form-input"
+                    type="number"
+                    id="age"
+                    name="age"
+                    min="10"
+                    max="120"
+                    placeholder="25"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="gender">Giới tính</label>
+                  <select
+                    class="form-input form-select"
+                    id="gender"
+                    name="gender"
+                    required
+                  >
+                    <option value="">— Chọn —</option>
+                    <option value="male">Nam</option>
+                    <option value="female">Nữ</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="weightKg">Cân nặng (kg)</label>
+                  <input
+                    class="form-input"
+                    type="number"
+                    id="weightKg"
+                    name="weightKg"
+                    min="20"
+                    max="300"
+                    step="0.1"
+                    placeholder="65.0"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="heightCm"
+                    >Chiều cao (cm)</label
+                  >
+                  <input
+                    class="form-input"
+                    type="number"
+                    id="heightCm"
+                    name="heightCm"
+                    min="100"
+                    max="250"
+                    step="0.1"
+                    placeholder="170.0"
+                    required
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-section">
+              <legend class="form-section__title">Lối sống & Mục tiêu</legend>
+              <div class="form-group">
+                <label class="form-label" for="activityLevel"
+                  >Mức độ vận động</label
+                >
+                <select
+                  class="form-input form-select"
+                  id="activityLevel"
+                  name="activityLevel"
+                  required
+                >
+                  <option value="">— Chọn —</option>
+                  <option value="sedentary">
+                    Ít vận động (ngồi văn phòng)
+                  </option>
+                  <option value="light">Nhẹ (tập 1–3 ngày/tuần)</option>
+                  <option value="moderate">Vừa (tập 3–5 ngày/tuần)</option>
+                  <option value="active">Nhiều (tập 6–7 ngày/tuần)</option>
+                  <option value="very_active">Rất nhiều (lao động nặng)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="goal">Mục tiêu</label>
+                <select class="form-input form-select" id="goal" name="goal">
+                  <option value="maintain">Duy trì cân nặng</option>
+                  <option value="lose_weight">Giảm cân (−500 kcal/ngày)</option>
+                  <option value="gain_muscle">Tăng cơ (+300 kcal/ngày)</option>
+                </select>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-section">
+              <legend class="form-section__title">Bệnh lý (nếu có)</legend>
+              <p class="form-hint-text">
+                AI sẽ loại trừ thực phẩm không phù hợp với tình trạng của bạn.
+              </p>
+              <div class="disease-grid">
+                <label class="disease-option">
+                  <input type="checkbox" name="diseases" value="diabetes_t2" />
+                  <span>Tiểu đường Type 2</span>
+                </label>
+                <label class="disease-option">
+                  <input type="checkbox" name="diseases" value="hypertension" />
+                  <span>Tăng huyết áp</span>
+                </label>
+                <label class="disease-option">
+                  <input type="checkbox" name="diseases" value="heart" />
+                  <span>Tim mạch</span>
+                </label>
+                <label class="disease-option">
+                  <input type="checkbox" name="diseases" value="gout" />
+                  <span>Gout</span>
+                </label>
+                <label class="disease-option">
+                  <input type="checkbox" name="diseases" value="kidney" />
+                  <span>Bệnh thận</span>
+                </label>
+                <label class="disease-option">
+                  <input type="checkbox" name="diseases" value="celiac" />
+                  <span>Celiac (không gluten)</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <button class="btn-primary btn-full" type="submit" id="saveBtn">
+              Lưu hồ sơ & tính chỉ số
+            </button>
+          </form>
+        </div>
+
+        <!-- Result panel -->
+        <div class="profile-result" id="profileResult" hidden>
+          <p class="section-label">— Chỉ số của bạn</p>
+
+          <div class="result-bmi">
+            <div class="result-bmi__number" id="resBMI">—</div>
+            <div class="result-bmi__label">BMI</div>
+            <div class="result-bmi__class" id="resBMIClass">—</div>
+          </div>
+
+          <div class="result-bar" id="bmiBar" aria-hidden="true">
+            <div class="result-bar__track">
+              <div class="result-bar__fill" id="bmiBarFill"></div>
+            </div>
+            <div class="result-bar__labels">
+              <span>Thiếu cân</span>
+              <span>Bình thường</span>
+              <span>Thừa cân</span>
+              <span>Béo phì</span>
+            </div>
+          </div>
+
+          <div class="result-metrics">
+            <div class="result-metric">
+              <span class="result-metric__label">BMR</span>
+              <span class="result-metric__value" id="resBMR">—</span>
+              <span class="result-metric__unit">kcal/ngày</span>
+            </div>
+            <div class="result-metric">
+              <span class="result-metric__label">TDEE</span>
+              <span class="result-metric__value" id="resTDEE">—</span>
+              <span class="result-metric__unit">kcal/ngày</span>
+            </div>
+            <div class="result-metric is-highlight">
+              <span class="result-metric__label">Mục tiêu</span>
+              <span class="result-metric__value" id="resTarget">—</span>
+              <span class="result-metric__unit">kcal/ngày</span>
+            </div>
+          </div>
+
+          <a
+            href="dashboard.html"
+            class="btn-primary btn-full"
+            style="
+              text-align: center;
+              display: block;
+              text-decoration: none;
+              margin-top: var(--space-sm);
+            "
+          >
+            Về Dashboard →
+          </a>
+        </div>
+      </div>
+      <!-- /profile-layout -->
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

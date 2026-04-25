@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — NutritionSystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/pages/dashboard.css" />
+  </head>
+  <body>
+    <!-- Top nav -->
+    <header class="dash-nav">
+      <a href="index.html" class="dash-nav__logo">NUTRITION·AI</a>
+      <nav class="dash-nav__links">
+        <a href="dashboard.html" class="dash-nav__link is-active">Tổng quan</a>
+        <a href="profile.html" class="dash-nav__link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-nav__link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-nav__link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-nav__link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-nav__link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-nav__link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-nav__user">
+        <span id="navUserName">—</span>
+        <button class="btn-logout" id="logoutBtn" aria-label="Đăng xuất">
+          Đăng xuất
+        </button>
+      </div>
+      <button
+        class="dash-hamburger"
+        id="dashHamburger"
+        aria-label="Mở menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="dash-mobile-drawer" id="dashMobileDrawer" aria-hidden="true">
+      <nav class="dash-mobile-nav">
+        <a href="dashboard.html" class="dash-mobile-link">Tổng quan</a>
+        <a href="profile.html" class="dash-mobile-link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-mobile-link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-mobile-link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-mobile-link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-mobile-link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-mobile-link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-mobile-user">
+        <span id="mobileNavUserName">—</span>
+        <button class="btn-logout" id="mobileLogoutBtn">Đăng xuất</button>
+      </div>
+    </div>
+
+    <main class="dash-main">
+      <!-- Greeting -->
+      <section class="dash-greeting">
+        <p class="section-label">. Dashboard .</p>
+        <h1 class="dash-greeting__title">
+          Xin chào, <em id="greetName">bạn</em>
+        </h1>
+        <p class="dash-greeting__sub">
+          Đây là tổng quan sức khỏe của bạn hôm nay.
+        </p>
+      </section>
+
+      <!-- Profile incomplete banner -->
+      <div class="dash-banner" id="profileBanner" hidden>
+        <div class="dash-banner__text">
+          <strong>Hoàn thiện hồ sơ sức khỏe</strong>
+          <span>để nhận gợi ý thực đơn cá nhân hóa.</span>
+        </div>
+        <a href="profile.html" class="btn-primary">Nhập hồ sơ →</a>
+      </div>
+
+      <!-- Stats cards -->
+      <section class="dash-stats" id="dashStats" hidden>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">BMI</p>
+          <p class="dash-stat-card__value" id="statBMI">—</p>
+          <p class="dash-stat-card__sub" id="statBMIClass">—</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">BMR</p>
+          <p class="dash-stat-card__value" id="statBMR">—</p>
+          <p class="dash-stat-card__sub">kcal cơ bản / ngày</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">TDEE</p>
+          <p class="dash-stat-card__value" id="statTDEE">—</p>
+          <p class="dash-stat-card__sub">kcal cần / ngày</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Mục tiêu</p>
+          <p class="dash-stat-card__value" id="statTarget">—</p>
+          <p class="dash-stat-card__sub">kcal mục tiêu / ngày</p>
+        </div>
+      </section>
+
+      <!-- Quick actions -->
+      <section class="dash-actions">
+        <p class="section-label">— Hành động nhanh</p>
+        <div class="dash-actions__grid">
+          <a href="profile.html" class="dash-action-card">
+            <div class="dash-action-card__icon" aria-hidden="true">👤</div>
+            <p class="dash-action-card__title">Cập nhật hồ sơ</p>
+            <p class="dash-action-card__sub">Cân nặng, chiều cao, bệnh lý</p>
+          </a>
+          <a href="meal-planner.html" class="dash-action-card">
+            <div class="dash-action-card__icon" aria-hidden="true">🥗</div>
+            <p class="dash-action-card__title">Thực đơn AI 7 ngày</p>
+            <p class="dash-action-card__sub">Tạo thực đơn cá nhân hóa với AI</p>
+          </a>
+          <a href="tracker.html" class="dash-action-card">
+            <div class="dash-action-card__icon" aria-hidden="true">⚖️</div>
+            <p class="dash-action-card__title">Ghi cân nặng</p>
+            <p class="dash-action-card__sub">Theo dõi tiến trình của bạn</p>
+          </a>
+          <a href="meal-log.html" class="dash-action-card">
+            <div class="dash-action-card__icon" aria-hidden="true">📋</div>
+            <p class="dash-action-card__title">Nhật ký bữa ăn</p>
+            <p class="dash-action-card__sub">Ghi lại thực phẩm hôm nay</p>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>

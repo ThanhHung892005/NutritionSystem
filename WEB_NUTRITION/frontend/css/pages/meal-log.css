@@ -1,0 +1,205 @@
+/* Meal Logger page */
+
+.meal-log-date-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.meal-log-date-bar .form-label {
+  font: 500 13px var(--font-body);
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.meal-log-date-bar .form-input {
+  width: auto;
+}
+
+.meal-log-totals {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+/* Two-column layout */
+.meal-log-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: var(--space-md);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .meal-log-layout {
+    grid-template-columns: 1fr;
+  }
+  .meal-log-totals {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Form panel */
+.meal-log-form-panel {
+  background: var(--color-linen);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  position: sticky;
+  top: calc(60px + var(--space-md));
+}
+
+/* Mode toggle */
+.meal-mode-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--color-cream);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+}
+
+.meal-mode-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 7px 12px;
+  font: 500 13px var(--font-body);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+}
+
+.meal-mode-btn.is-active {
+  background: var(--color-forest);
+  color: var(--color-cream);
+}
+
+/* Food search dropdown */
+.food-search-wrap {
+  position: relative;
+}
+
+.food-results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--color-cream);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-md);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 50;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.food-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px var(--space-sm);
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-sand);
+  transition: background var(--duration-fast) ease;
+}
+
+.food-result-item:last-child {
+  border-bottom: none;
+}
+
+.food-result-item:hover,
+.food-result-item.is-selected {
+  background: color-mix(in srgb, var(--color-mint) 20%, var(--color-cream));
+}
+
+.food-result-name {
+  font: 500 14px var(--font-body);
+  color: var(--color-ink);
+}
+
+.food-result-cal {
+  font: 400 12px var(--font-mono);
+  color: var(--color-muted);
+}
+
+/* List panel */
+.meal-log-list-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.meal-group {
+  background: var(--color-linen);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.meal-group__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px var(--space-sm);
+  border-bottom: 1px solid var(--color-sand);
+}
+
+.meal-group__title {
+  font: 600 11px var(--font-mono);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.meal-group__cal {
+  font: 400 12px var(--font-mono);
+  color: var(--color-forest);
+}
+
+.meal-group .meal-list {
+  padding: var(--space-xs);
+}
+
+.meal-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meal-delete-btn {
+  background: none;
+  border: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 14px;
+  color: var(--color-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--duration-fast) ease;
+  flex-shrink: 0;
+}
+
+.meal-delete-btn:hover {
+  color: var(--color-citrus);
+}
+
+.meal-log-empty {
+  text-align: center;
+  padding: var(--space-lg);
+  color: var(--color-muted);
+  font: 400 15px var(--font-body);
+  background: var(--color-linen);
+  border: 1px dashed var(--color-sand);
+  border-radius: var(--radius-md);
+}

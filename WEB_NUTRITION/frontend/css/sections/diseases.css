@@ -1,0 +1,108 @@
+.diseases {
+  background: var(--color-cream);
+  padding: var(--space-2xl) 0;
+}
+
+.diseases-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: end;
+  margin-bottom: var(--space-xl);
+}
+
+.diseases-header h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  color: var(--color-forest);
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+.diseases-header h2 em {
+  font-style: italic;
+  color: var(--color-sage);
+}
+
+.diseases-header-right p {
+  font-size: 16px;
+  color: var(--color-muted);
+  line-height: 1.7;
+  max-width: 48ch;
+}
+
+.diseases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-sm);
+}
+
+.disease-card {
+  background: var(--color-linen);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  cursor: pointer;
+  transition:
+    transform 300ms var(--ease-out-expo),
+    background 200ms ease,
+    border-color 200ms ease;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.disease-card:hover {
+  transform: translateY(-4px);
+  background: var(--color-forest);
+  border-color: var(--color-forest);
+}
+
+.disease-card:hover .disease-name {
+  color: var(--color-mint);
+}
+.disease-card:hover .disease-desc {
+  color: rgba(245, 240, 232, 0.6);
+}
+.disease-card:hover .disease-icon-wrap {
+  background: rgba(168, 197, 160, 0.15);
+}
+
+.disease-icon-wrap {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: rgba(168, 197, 160, 0.2);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: background 200ms ease;
+}
+
+.disease-content {
+  flex: 1;
+}
+
+.disease-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-forest);
+  margin-bottom: 4px;
+  transition: color 200ms ease;
+}
+
+.disease-desc {
+  font-size: 13px;
+  color: var(--color-muted);
+  line-height: 1.5;
+  transition: color 200ms ease;
+}
+
+@media (max-width: 768px) {
+  .diseases-header {
+    grid-template-columns: 1fr;
+  }
+}

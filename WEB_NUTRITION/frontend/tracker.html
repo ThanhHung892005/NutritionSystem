@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theo dõi cân nặng — NutritionSystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/pages/dashboard.css" />
+    <link rel="stylesheet" href="css/sections/data-preview.css" />
+    <link rel="stylesheet" href="css/pages/tracker.css" />
+  </head>
+  <body>
+    <header class="dash-nav">
+      <a href="index.html" class="dash-nav__logo">NUTRITION·AI</a>
+      <nav class="dash-nav__links">
+        <a href="dashboard.html" class="dash-nav__link">Tổng quan</a>
+        <a href="profile.html" class="dash-nav__link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-nav__link is-active">Cân nặng</a>
+        <a href="meal-log.html" class="dash-nav__link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-nav__link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-nav__link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-nav__link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-nav__user">
+        <span id="navUserName">—</span>
+        <button class="btn-logout" id="logoutBtn" aria-label="Đăng xuất">
+          Đăng xuất
+        </button>
+      </div>
+      <button
+        class="dash-hamburger"
+        id="dashHamburger"
+        aria-label="Mở menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="dash-mobile-drawer" id="dashMobileDrawer" aria-hidden="true">
+      <nav class="dash-mobile-nav">
+        <a href="dashboard.html" class="dash-mobile-link">Tổng quan</a>
+        <a href="profile.html" class="dash-mobile-link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-mobile-link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-mobile-link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-mobile-link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-mobile-link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-mobile-link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-mobile-user">
+        <span id="mobileNavUserName">—</span>
+        <button class="btn-logout" id="mobileLogoutBtn">Đăng xuất</button>
+      </div>
+    </div>
+
+    <main class="dash-main">
+      <section class="dash-greeting" data-animate="fade-up">
+        <p class="section-label">. 02 .</p>
+        <h1 class="dash-greeting__title">Theo dõi <em>cân nặng</em></h1>
+        <p class="dash-greeting__sub">
+          Ghi lại cân nặng hàng ngày để theo dõi tiến trình của bạn.
+        </p>
+      </section>
+
+      <!-- Log form -->
+      <div class="tracker-form-card" data-animate="fade-up" data-delay="100">
+        <p class="section-label">— Ghi cân hôm nay</p>
+        <div class="auth-error" id="trackerError" role="alert" hidden></div>
+        <form id="weightForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="weightKg">Cân nặng (kg)</label>
+              <input
+                class="form-input"
+                type="number"
+                id="weightKg"
+                min="20"
+                max="500"
+                step="0.1"
+                placeholder="70.0"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="loggedAt">Ngày</label>
+              <input class="form-input" type="date" id="loggedAt" />
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: var(--space-xs)">
+            <label class="form-label" for="weightNote"
+              >Ghi chú (tùy chọn)</label
+            >
+            <input
+              class="form-input"
+              type="text"
+              id="weightNote"
+              placeholder="Sau bữa sáng, sau tập gym..."
+              maxlength="200"
+            />
+          </div>
+          <button class="btn-primary btn-full" type="submit" id="saveWeightBtn">
+            Lưu cân nặng
+          </button>
+        </form>
+      </div>
+
+      <!-- Stats -->
+      <section
+        class="tracker-stats"
+        id="trackerStats"
+        data-animate="fade-up"
+        data-delay="200"
+      >
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Hiện tại</p>
+          <p class="dash-stat-card__value" id="statCurrent">—</p>
+          <p class="dash-stat-card__sub">kg</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Ban đầu</p>
+          <p class="dash-stat-card__value" id="statStart">—</p>
+          <p class="dash-stat-card__sub">kg</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Thay đổi</p>
+          <p class="dash-stat-card__value" id="statChange">—</p>
+          <p class="dash-stat-card__sub">kg</p>
+        </div>
+      </section>
+
+      <!-- Chart -->
+      <div
+        class="tracker-chart-card"
+        id="chartCard"
+        data-animate="fade-up"
+        data-delay="300"
+        hidden
+      >
+        <p class="preview-card-label">Tiến trình 30 ngày gần nhất</p>
+        <div class="tracker-chart-wrap">
+          <div class="weight-chart" id="weightChart"></div>
+          <div class="weight-labels" id="weightLabels"></div>
+        </div>
+      </div>
+
+      <!-- History -->
+      <section data-animate="fade-up" data-delay="350">
+        <p class="section-label">— Lịch sử</p>
+        <div class="tracker-log-list" id="logList">
+          <div class="tracker-empty">
+            Chưa có dữ liệu. Hãy ghi lại cân nặng đầu tiên!
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/app-animations.js"></script>
+    <script src="js/tracker.js"></script>
+  </body>
+</html>

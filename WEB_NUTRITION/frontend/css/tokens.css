@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap");
+
+:root {
+  /* Colors */
+  --color-forest: #1c3a2b;
+  --color-sage: #4a7c59;
+  --color-mint: #a8c5a0;
+  --color-cream: #f5f0e8;
+  --color-linen: #ede8dc;
+  --color-sand: #c8b99a;
+  --color-ink: #1a1a1a;
+  --color-muted: #6b6560;
+  --color-citrus: #d4813a;
+  --color-blush: #e8c4a0;
+  --color-white: #ffffff;
+
+  /* Fonts */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --font-mono: "DM Mono", "Courier New", monospace;
+
+  /* Type scale */
+  --text-hero: clamp(40px, 4.6vw, 68px);
+  --text-h1: clamp(40px, 4vw, 56px);
+  --text-h2: clamp(28px, 3vw, 36px);
+  --text-h3: 24px;
+  --text-body: 17px;
+  --text-sm: 13px;
+  --text-tag: 11px;
+
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 32px;
+  --space-lg: 64px;
+  --space-xl: 128px;
+  --space-2xl: 200px;
+
+  /* Container */
+  --container-max: 1280px;
+  --container-pad: clamp(24px, 5vw, 80px);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 16px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+
+  /* Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Durations */
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+}

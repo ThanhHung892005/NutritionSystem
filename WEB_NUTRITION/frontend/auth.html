@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập — NutritionSystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/pages/auth.css" />
+  </head>
+  <body>
+    <!-- Nav minimal -->
+    <nav class="auth-nav">
+      <a href="index.html" class="auth-nav__logo">NUTRITION·AI</a>
+    </nav>
+
+    <main class="auth-main">
+      <!-- Decorative side -->
+      <div class="auth-side" aria-hidden="true">
+        <div class="auth-side__blob"></div>
+        <div class="auth-side__quote">
+          <p>
+            "Dinh dưỡng đúng là<br /><em>nền tảng của mọi mục tiêu</em><br />sức
+            khỏe."
+          </p>
+          <span>— NutritionSystem AI</span>
+        </div>
+      </div>
+
+      <!-- Form panel -->
+      <div class="auth-panel">
+        <!-- Tabs -->
+        <div class="auth-tabs" role="tablist">
+          <button
+            class="auth-tab is-active"
+            role="tab"
+            data-tab="login"
+            aria-selected="true"
+          >
+            Đăng nhập
+          </button>
+          <button
+            class="auth-tab"
+            role="tab"
+            data-tab="register"
+            aria-selected="false"
+          >
+            Đăng ký
+          </button>
+        </div>
+
+        <!-- Error banner -->
+        <div class="auth-error" id="authError" role="alert" hidden>
+          <span id="authErrorMsg"></span>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form
+          class="auth-form is-active"
+          id="loginForm"
+          data-form="login"
+          novalidate
+        >
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email</label>
+            <input
+              class="form-input"
+              type="email"
+              id="loginEmail"
+              name="email"
+              placeholder="ban@example.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Mật khẩu</label>
+            <input
+              class="form-input"
+              type="password"
+              id="loginPassword"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+          <button class="btn-primary btn-full" type="submit" id="loginBtn">
+            Đăng nhập
+          </button>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form
+          class="auth-form"
+          id="registerForm"
+          data-form="register"
+          novalidate
+        >
+          <div class="form-group">
+            <label class="form-label" for="regName">Họ và tên</label>
+            <input
+              class="form-input"
+              type="text"
+              id="regName"
+              name="fullName"
+              placeholder="Nguyễn Văn A"
+              autocomplete="name"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regEmail">Email</label>
+            <input
+              class="form-input"
+              type="email"
+              id="regEmail"
+              name="email"
+              placeholder="ban@example.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regPassword">
+              Mật khẩu <span class="form-hint">(tối thiểu 8 ký tự)</span>
+            </label>
+            <input
+              class="form-input"
+              type="password"
+              id="regPassword"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="new-password"
+              required
+            />
+          </div>
+          <button class="btn-primary btn-full" type="submit" id="registerBtn">
+            Tạo tài khoản
+          </button>
+        </form>
+      </div>
+      <!-- /auth-panel -->
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

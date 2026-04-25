@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Báo cáo tuần — NutritionSystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/pages/dashboard.css" />
+    <link rel="stylesheet" href="css/sections/data-preview.css" />
+    <link rel="stylesheet" href="css/pages/tracker.css" />
+    <link rel="stylesheet" href="css/pages/weekly-report.css" />
+  </head>
+  <body>
+    <header class="dash-nav">
+      <a href="index.html" class="dash-nav__logo">NUTRITION·AI</a>
+      <nav class="dash-nav__links">
+        <a href="dashboard.html" class="dash-nav__link">Tổng quan</a>
+        <a href="profile.html" class="dash-nav__link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-nav__link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-nav__link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-nav__link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-nav__link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-nav__link is-active"
+          >Báo cáo tuần</a
+        >
+      </nav>
+      <div class="dash-nav__user">
+        <span id="navUserName">—</span>
+        <button class="btn-logout" id="logoutBtn" aria-label="Đăng xuất">
+          Đăng xuất
+        </button>
+      </div>
+      <button
+        class="dash-hamburger"
+        id="dashHamburger"
+        aria-label="Mở menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="dash-mobile-drawer" id="dashMobileDrawer" aria-hidden="true">
+      <nav class="dash-mobile-nav">
+        <a href="dashboard.html" class="dash-mobile-link">Tổng quan</a>
+        <a href="profile.html" class="dash-mobile-link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-mobile-link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-mobile-link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-mobile-link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-mobile-link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-mobile-link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-mobile-user">
+        <span id="mobileNavUserName">—</span>
+        <button class="btn-logout" id="mobileLogoutBtn">Đăng xuất</button>
+      </div>
+    </div>
+
+    <main class="dash-main">
+      <!-- Heading -->
+      <section class="dash-greeting" data-animate="fade-up">
+        <p class="section-label">. 07 .</p>
+        <h1 class="dash-greeting__title">Báo cáo <em>tuần</em></h1>
+        <p class="dash-greeting__sub">
+          Tổng hợp calo, macro và tiến trình cân nặng trong 7 ngày.
+        </p>
+      </section>
+
+      <!-- Week navigator -->
+      <div class="report-week-nav" data-animate="fade-up" data-delay="80">
+        <button
+          class="report-week-btn"
+          id="prevWeekBtn"
+          aria-label="Tuần trước"
+        >
+          ← Tuần trước
+        </button>
+        <span class="report-week-label" id="weekRangeLabel">—</span>
+        <button
+          class="report-week-btn"
+          id="nextWeekBtn"
+          aria-label="Tuần sau"
+          disabled
+        >
+          Tuần sau →
+        </button>
+      </div>
+
+      <!-- Summary stats -->
+      <section class="dash-stats" data-animate="fade-up" data-delay="150">
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Calo TB / ngày</p>
+          <p class="dash-stat-card__value" id="statAvgCalories">—</p>
+          <p class="dash-stat-card__sub">kcal</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Mục tiêu</p>
+          <p class="dash-stat-card__value" id="statTargetCalories">—</p>
+          <p class="dash-stat-card__sub">kcal / ngày</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Tuân thủ</p>
+          <p class="dash-stat-card__value" id="statAdherencePct">—</p>
+          <p class="dash-stat-card__sub">so với mục tiêu</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Đã log</p>
+          <p class="dash-stat-card__value" id="statDaysLogged">—</p>
+          <p class="dash-stat-card__sub">trong tuần</p>
+        </div>
+      </section>
+
+      <!-- Macro averages -->
+      <section
+        class="report-macro-grid"
+        data-animate="fade-up"
+        data-delay="200"
+      >
+        <div class="report-macro-card">
+          <p class="dash-stat-card__label">Đạm TB / ngày</p>
+          <p class="report-macro-value" id="macroProtein">—</p>
+          <div
+            class="report-macro-dot"
+            style="background: var(--color-sage)"
+          ></div>
+        </div>
+        <div class="report-macro-card">
+          <p class="dash-stat-card__label">Tinh bột TB / ngày</p>
+          <p class="report-macro-value" id="macroCarbs">—</p>
+          <div
+            class="report-macro-dot"
+            style="background: var(--color-citrus)"
+          ></div>
+        </div>
+        <div class="report-macro-card">
+          <p class="dash-stat-card__label">Chất béo TB / ngày</p>
+          <p class="report-macro-value" id="macroFat">—</p>
+          <div
+            class="report-macro-dot"
+            style="background: var(--color-blush)"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Daily bar chart -->
+      <div class="tracker-chart-card" data-animate="fade-up" data-delay="250">
+        <p class="preview-card-label">Calo mỗi ngày trong tuần</p>
+        <div class="report-bar-grid" id="reportBarGrid"></div>
+        <div class="report-chart-legend">
+          <span class="report-legend-item report-legend-good"
+            >≥ 80% mục tiêu</span
+          >
+          <span class="report-legend-item report-legend-ok">50 – 80%</span>
+          <span class="report-legend-item report-legend-low">&lt; 50%</span>
+          <span class="report-legend-item report-legend-empty">Chưa log</span>
+        </div>
+      </div>
+
+      <!-- Adherence progress bar -->
+      <div
+        class="report-adherence-card"
+        data-animate="fade-up"
+        data-delay="300"
+      >
+        <p class="section-label" id="adherenceLabel">Tuân thủ mục tiêu: —</p>
+        <div class="report-adherence-track">
+          <div class="report-adherence-fill" id="adherenceFill"></div>
+        </div>
+      </div>
+
+      <!-- Weight in week -->
+      <section
+        class="tracker-stats"
+        id="weightSection"
+        data-animate="fade-up"
+        data-delay="350"
+        hidden
+      >
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Cân đầu tuần</p>
+          <p class="dash-stat-card__value" id="weightStart">—</p>
+          <p class="dash-stat-card__sub">kg</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Cân cuối tuần</p>
+          <p class="dash-stat-card__value" id="weightEnd">—</p>
+          <p class="dash-stat-card__sub">kg</p>
+        </div>
+        <div class="dash-stat-card">
+          <p class="dash-stat-card__label">Thay đổi</p>
+          <p class="dash-stat-card__value" id="weightChange">—</p>
+          <p class="dash-stat-card__sub">kg trong tuần</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/app-animations.js"></script>
+    <script src="js/weekly-report.js"></script>
+  </body>
+</html>

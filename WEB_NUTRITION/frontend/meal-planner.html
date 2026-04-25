@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thực đơn AI — NutritionSystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/pages/dashboard.css" />
+    <link rel="stylesheet" href="css/sections/data-preview.css" />
+    <link rel="stylesheet" href="css/pages/meal-planner.css" />
+  </head>
+  <body>
+    <header class="dash-nav">
+      <a href="index.html" class="dash-nav__logo">NUTRITION·AI</a>
+      <nav class="dash-nav__links">
+        <a href="dashboard.html" class="dash-nav__link">Tổng quan</a>
+        <a href="profile.html" class="dash-nav__link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-nav__link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-nav__link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-nav__link is-active"
+          >Thực đơn AI</a
+        >
+        <a href="chatbot.html" class="dash-nav__link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-nav__link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-nav__user">
+        <span id="navUserName">—</span>
+        <button class="btn-logout" id="logoutBtn" aria-label="Đăng xuất">
+          Đăng xuất
+        </button>
+      </div>
+      <button
+        class="dash-hamburger"
+        id="dashHamburger"
+        aria-label="Mở menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="dash-mobile-drawer" id="dashMobileDrawer" aria-hidden="true">
+      <nav class="dash-mobile-nav">
+        <a href="dashboard.html" class="dash-mobile-link">Tổng quan</a>
+        <a href="profile.html" class="dash-mobile-link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-mobile-link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-mobile-link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-mobile-link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-mobile-link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-mobile-link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-mobile-user">
+        <span id="mobileNavUserName">—</span>
+        <button class="btn-logout" id="mobileLogoutBtn">Đăng xuất</button>
+      </div>
+    </div>
+
+    <main class="dash-main">
+      <section class="dash-greeting" data-animate="fade-up">
+        <p class="section-label">. 04 .</p>
+        <h1 class="dash-greeting__title">Thực đơn <em>AI 7 ngày</em></h1>
+        <p class="dash-greeting__sub">
+          AI tạo thực đơn cá nhân hóa theo hồ sơ sức khỏe và bệnh lý của bạn.
+        </p>
+      </section>
+
+      <!-- Generate panel -->
+      <div
+        class="planner-generate-panel"
+        data-animate="fade-up"
+        data-delay="100"
+      >
+        <div class="planner-profile-info">
+          <p id="plannerProfileInfo">Đang tải hồ sơ...</p>
+          <div class="diseases-tags" id="diseasesTags"></div>
+        </div>
+        <div class="planner-generate-row">
+          <div class="form-group">
+            <label class="form-label" for="startDate">Ngày bắt đầu</label>
+            <input class="form-input" type="date" id="startDate" />
+          </div>
+          <button class="btn-primary" id="generateBtn">
+            ✦ Tạo thực đơn 7 ngày
+          </button>
+        </div>
+        <div class="planner-loading" id="plannerLoading">
+          <div class="planner-spinner"></div>
+          <span>AI đang tạo thực đơn... (~10–20 giây)</span>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="planner-error" id="plannerError" hidden></div>
+
+      <!-- Week display -->
+      <div
+        class="planner-week"
+        id="plannerWeek"
+        hidden
+        data-animate="fade-up"
+        data-delay="150"
+      >
+        <div class="planner-nav">
+          <button class="planner-nav-btn" id="prevDay">← Ngày trước</button>
+          <p class="planner-day-indicator" id="dayIndicator">—</p>
+          <button class="planner-nav-btn" id="nextDay">Ngày sau →</button>
+        </div>
+        <div class="planner-day-card" id="dayCard">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- History -->
+      <section class="planner-history" data-animate="fade-up" data-delay="200">
+        <p class="section-label">— Thực đơn đã lưu</p>
+        <div class="planner-history-list" id="plannerHistoryList">
+          <p style="color: var(--color-muted); font-size: 14px">
+            Chưa có thực đơn nào được tạo.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/app-animations.js"></script>
+    <script src="js/meal-planner.js"></script>
+  </body>
+</html>

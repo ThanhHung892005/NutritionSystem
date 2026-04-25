@@ -1,0 +1,226 @@
+/* Weekly Report page */
+
+/* ─── Week navigator ─── */
+.report-week-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.report-week-btn {
+  background: var(--color-linen);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  font: 400 14px var(--font-body);
+  color: var(--color-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    transform 200ms var(--ease-out-expo);
+}
+
+.report-week-btn:hover:not(:disabled) {
+  border-color: var(--color-forest);
+  color: var(--color-forest);
+  transform: translateY(-1px);
+}
+
+.report-week-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.report-week-label {
+  font: 500 15px var(--font-body);
+  color: var(--color-forest);
+  flex: 1;
+  text-align: center;
+}
+
+/* ─── Macro cards ─── */
+.report-macro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+
+.report-macro-card {
+  background: var(--color-linen);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.report-macro-value {
+  font: 700 28px var(--font-mono);
+  color: var(--color-forest);
+  line-height: 1;
+}
+
+.report-macro-dot {
+  width: 24px;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  margin-top: 2px;
+}
+
+/* ─── Daily bar chart ─── */
+.report-bar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  height: 140px;
+  align-items: flex-end;
+  margin: var(--space-sm) 0;
+}
+
+.report-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.report-bar {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  cursor: default;
+  transition: opacity 200ms ease;
+}
+
+.report-bar:hover {
+  opacity: 0.8;
+}
+
+.report-bar.is-good {
+  background: var(--color-forest);
+}
+.report-bar.is-ok {
+  background: var(--color-sage);
+}
+.report-bar.is-low {
+  background: var(--color-citrus);
+}
+.report-bar.is-empty {
+  background: var(--color-sand);
+  opacity: 0.4;
+}
+
+.report-bar-label {
+  font: 400 10px var(--font-mono);
+  color: var(--color-muted);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.report-bar-cal {
+  font: 400 9px var(--font-mono);
+  color: var(--color-muted);
+  text-align: center;
+  min-height: 12px;
+  line-height: 1.2;
+}
+
+/* ─── Chart legend ─── */
+.report-chart-legend {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-top: var(--space-xs);
+}
+
+.report-legend-item {
+  font: 400 11px var(--font-mono);
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.report-legend-item::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.report-legend-good::before {
+  background: var(--color-forest);
+}
+.report-legend-ok::before {
+  background: var(--color-sage);
+}
+.report-legend-low::before {
+  background: var(--color-citrus);
+}
+.report-legend-empty::before {
+  background: var(--color-sand);
+  opacity: 0.5;
+}
+
+/* ─── Adherence bar ─── */
+.report-adherence-card {
+  background: var(--color-linen);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.report-adherence-track {
+  height: 10px;
+  background: var(--color-cream);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.report-adherence-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--color-forest);
+  width: 0%;
+  transition: width 800ms var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .report-adherence-fill {
+    transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .report-week-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .report-macro-grid {
+    gap: var(--space-xs);
+  }
+
+  .report-macro-value {
+    font-size: 22px;
+  }
+
+  .report-bar-cal {
+    display: none;
+  }
+
+  .report-bar-label {
+    font-size: 9px;
+  }
+}

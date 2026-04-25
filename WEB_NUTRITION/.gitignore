@@ -1,0 +1,16 @@
+# Design assets (large binaries)
+inspiration.png
+inspiration_sm.png
+screenshots/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code metadata
+.claude/
+
+# Editor
+.vscode/
+*.swp
+*.swo

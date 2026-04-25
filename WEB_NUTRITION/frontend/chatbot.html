@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trợ lý AI — NutritionSystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/pages/dashboard.css" />
+    <link rel="stylesheet" href="css/pages/chatbot.css" />
+  </head>
+  <body>
+    <header class="dash-nav">
+      <a href="index.html" class="dash-nav__logo">NUTRITION·AI</a>
+      <nav class="dash-nav__links">
+        <a href="dashboard.html" class="dash-nav__link">Tổng quan</a>
+        <a href="profile.html" class="dash-nav__link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-nav__link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-nav__link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-nav__link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-nav__link is-active">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-nav__link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-nav__user">
+        <span id="navUserName">—</span>
+        <button class="btn-logout" id="logoutBtn" aria-label="Đăng xuất">
+          Đăng xuất
+        </button>
+      </div>
+      <button
+        class="dash-hamburger"
+        id="dashHamburger"
+        aria-label="Mở menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="dash-mobile-drawer" id="dashMobileDrawer" aria-hidden="true">
+      <nav class="dash-mobile-nav">
+        <a href="dashboard.html" class="dash-mobile-link">Tổng quan</a>
+        <a href="profile.html" class="dash-mobile-link">Hồ sơ</a>
+        <a href="tracker.html" class="dash-mobile-link">Cân nặng</a>
+        <a href="meal-log.html" class="dash-mobile-link">Nhật ký ăn</a>
+        <a href="meal-planner.html" class="dash-mobile-link">Thực đơn AI</a>
+        <a href="chatbot.html" class="dash-mobile-link">Trợ lý AI</a>
+        <a href="weekly-report.html" class="dash-mobile-link">Báo cáo tuần</a>
+      </nav>
+      <div class="dash-mobile-user">
+        <span id="mobileNavUserName">—</span>
+        <button class="btn-logout" id="mobileLogoutBtn">Đăng xuất</button>
+      </div>
+    </div>
+
+    <main class="dash-main">
+      <section class="dash-greeting" data-animate="fade-up">
+        <p class="section-label">. 05 .</p>
+        <h1 class="dash-greeting__title">Trợ lý <em>dinh dưỡng AI</em></h1>
+        <p class="dash-greeting__sub">
+          Hỏi bất kỳ điều gì về dinh dưỡng, thực đơn của bạn, hoặc để AI kiểm
+          tra xem bữa ăn có phù hợp với sức khỏe của bạn không.
+        </p>
+      </section>
+
+      <div
+        class="chatbot-profile-badge"
+        id="chatProfileBadge"
+        data-animate="fade-up"
+        data-delay="80"
+        hidden
+      ></div>
+
+      <div
+        class="dash-banner"
+        id="chatNoProfileBanner"
+        data-animate="fade-up"
+        data-delay="80"
+        hidden
+      >
+        <div class="dash-banner__text">
+          <strong>Chưa có hồ sơ sức khỏe</strong>
+          <span
+            >Điền hồ sơ để AI tư vấn cá nhân hóa và kiểm tra thực đơn chính xác
+            hơn.</span
+          >
+        </div>
+        <a href="profile.html" class="btn-primary">Điền hồ sơ →</a>
+      </div>
+
+      <!-- Meal Review Toggle -->
+      <div
+        class="meal-review-toggle-row"
+        data-animate="fade-up"
+        data-delay="120"
+      >
+        <button
+          class="meal-review-toggle"
+          id="toggleMealReview"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mealReviewPanel"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"
+            />
+            <rect x="9" y="3" width="6" height="4" rx="1" ry="1" />
+            <line x1="9" y1="12" x2="15" y2="12" />
+            <line x1="9" y1="16" x2="13" y2="16" />
+          </svg>
+          Đánh giá bữa ăn hôm nay
+        </button>
+      </div>
+
+      <!-- Meal Review Panel -->
+      <div class="meal-review-panel" id="mealReviewPanel" hidden>
+        <div class="meal-review-header">
+          <div>
+            <span class="meal-review-header__title"
+              >Đánh giá bữa ăn hôm nay</span
+            >
+            <p class="meal-review-header__hint">
+              Số lượng: nhập khối lượng (g, kg) hoặc đơn vị thông dụng —
+              <em>200g · 1 bát · 2 chén · 1 miếng · 1 hộp · 1 ly</em>
+            </p>
+          </div>
+          <button
+            class="meal-review-header__close"
+            id="mealReviewClose"
+            type="button"
+            aria-label="Đóng"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="meal-review-body">
+          <!-- Được render bởi JS -->
+        </div>
+        <div class="meal-review-footer">
+          <button
+            class="meal-review-submit"
+            id="mealReviewSubmit"
+            type="button"
+          >
+            Gửi AI đánh giá
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="chatbot-window" data-animate="fade-up" data-delay="150">
+        <div
+          class="chatbot-messages"
+          id="chatMessages"
+          role="log"
+          aria-live="polite"
+          aria-label="Cuộc trò chuyện"
+        ></div>
+
+        <div
+          class="chatbot-typing"
+          id="chatTyping"
+          hidden
+          aria-hidden="true"
+          aria-label="AI đang soạn"
+        >
+          <div class="chatbot-typing__dot"></div>
+          <div class="chatbot-typing__dot"></div>
+          <div class="chatbot-typing__dot"></div>
+        </div>
+
+        <div class="chatbot-input-area">
+          <textarea
+            class="chatbot-textarea"
+            id="chatInput"
+            placeholder="Hỏi về dinh dưỡng, thực đơn, bệnh lý..."
+            rows="1"
+            maxlength="2000"
+            aria-label="Nhập tin nhắn"
+          ></textarea>
+          <button
+            class="chatbot-send-btn"
+            id="chatSendBtn"
+            aria-label="Gửi tin nhắn"
+            disabled
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="chatbot-footer-row" data-animate="fade-up" data-delay="200">
+        <div class="chatbot-suggestions">
+          <p class="section-label" style="margin: 0">— Gợi ý câu hỏi</p>
+          <div class="chatbot-suggestion-chips" id="chatChips"></div>
+        </div>
+        <button class="chatbot-clear-btn" id="chatClearBtn">
+          Xóa hội thoại
+        </button>
+      </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/app-animations.js"></script>
+    <script src="js/chatbot.js"></script>
+  </body>
+</html>
