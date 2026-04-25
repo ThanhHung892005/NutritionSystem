@@ -7,9 +7,6 @@ screenshots/
 .DS_Store
 Thumbs.db
 
-# Claude Code metadata
-.claude/
-
 # Editor
 .vscode/
 *.swp
