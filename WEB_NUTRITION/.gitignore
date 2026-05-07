@@ -1,13 +1,43 @@
-# Design assets (large binaries)
+# ─── Claude AI config ────────────────────────────────────────────────
+.claude/
+
+# ─── Bảo mật — credentials & keys ───────────────────────────────────
+.env
+.env.*
+*.env
+secrets.*
+credentials.*
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+*.jks
+service-account*.json
+firebase*.json
+
+# ─── Design assets (large binaries) ──────────────────────────────────
 inspiration.png
 inspiration_sm.png
 screenshots/
 
-# OS
+# ─── OS ──────────────────────────────────────────────────────────────
 .DS_Store
+.DS_Store?
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# Editor
+# ─── Editor ──────────────────────────────────────────────────────────
 .vscode/
+.idea/
 *.swp
 *.swo
+*~
+
+# ─── Dependency & build ───────────────────────────────────────────────
+node_modules/
+dist/
+build/
+.cache/
