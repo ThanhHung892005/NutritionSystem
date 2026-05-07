@@ -6,8 +6,11 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "db:init": "/Library/PostgreSQL/17/bin/psql -U postgres -d nutrition_system -f src/db/schema.sql",
-    "db:seed": "/Library/PostgreSQL/17/bin/psql -U postgres -d nutrition_system -f src/db/seed.sql"
+    "db:create": "psql -U postgres -c \"CREATE DATABASE nutrition_system;\"",
+    "db:init": "psql -U postgres -d nutrition_system -f src/db/schema.sql",
+    "db:migrate": "psql -U postgres -d nutrition_system -f src/db/migration_phase2.sql && psql -U postgres -d nutrition_system -f src/db/migration_chat_history.sql && psql -U postgres -d nutrition_system -f src/db/migration_foods.sql",
+    "db:seed": "psql -U postgres -d nutrition_system -f src/db/seed.sql",
+    "db:setup": "npm run db:create && npm run db:init && npm run db:migrate && npm run db:seed"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
