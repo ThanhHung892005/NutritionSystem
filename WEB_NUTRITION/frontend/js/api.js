@@ -124,7 +124,7 @@ function initDashNav() {
   // Sync username
   const u = getUser();
   if (mobileNameEl && u) {
-    mobileNameEl.textContent = u.full_name || u.email || "—";
+    mobileNameEl.textContent = u.full_name || u.username || "—";
   }
 
   // Auto-detect active link
