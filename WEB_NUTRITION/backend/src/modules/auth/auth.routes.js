@@ -8,10 +8,15 @@ const router = express.Router();
 router.post(
   "/register",
   [
-    body("email").isEmail().normalizeEmail().withMessage("Email không hợp lệ"),
+    body("username")
+      .trim()
+      .isLength({ min: 3, max: 50 })
+      .withMessage("Tên đăng nhập 3–50 ký tự")
+      .matches(/^[a-zA-Z0-9_]+$/)
+      .withMessage("Tên đăng nhập chỉ gồm chữ, số và dấu _"),
     body("password")
-      .isLength({ min: 8 })
-      .withMessage("Mật khẩu tối thiểu 8 ký tự"),
+      .isLength({ min: 6 })
+      .withMessage("Mật khẩu tối thiểu 6 ký tự"),
     body("fullName").optional().trim().isLength({ max: 255 }),
   ],
   controller.register,
@@ -21,7 +26,7 @@ router.post(
 router.post(
   "/login",
   [
-    body("email").isEmail().normalizeEmail().withMessage("Email không hợp lệ"),
+    body("username").trim().notEmpty().withMessage("Tên đăng nhập không được để trống"),
     body("password").notEmpty().withMessage("Mật khẩu không được để trống"),
   ],
   controller.login,

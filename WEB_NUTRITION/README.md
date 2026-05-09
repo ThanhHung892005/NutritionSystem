@@ -31,15 +31,11 @@ Docker tự động:
 - Tạo database `nutrition_system`
 - Chạy schema → migration → seed đúng thứ tự
 - Khởi động backend Express (port 3001)
+- Serve frontend qua nginx (port 8099)
 
-Backend sẵn sàng khi `docker compose logs backend` không còn báo lỗi kết nối DB.
+Mở trình duyệt tại **http://localhost:8099**
 
-```bash
-# Serve frontend (port 8099)
-npx serve frontend -l 8099
-```
-
-Mở trình duyệt tại `http://localhost:8099`
+> **Lưu ý:** Nếu máy đã có PostgreSQL local đang chiếm port 5432, DB container sẽ tự động expose ra port **5433** thay thế. Backend container vẫn kết nối nội bộ bình thường.
 
 ### Lệnh Docker hữu ích
 
@@ -79,11 +75,6 @@ npm run db:setup
 npm run dev
 ```
 
-```bash
-# Serve frontend (port 8099)
-npx serve frontend -l 8099
-```
-
 ### npm scripts database
 
 | Script               | Tác dụng                                     |
@@ -121,7 +112,7 @@ npx serve frontend -l 8099
 
 ```
 WEB_NUTRITION/
-├── docker-compose.yml          # Docker: db + backend
+├── docker-compose.yml          # Docker: db + backend + frontend
 ├── backend/
 │   ├── Dockerfile
 │   ├── src/
